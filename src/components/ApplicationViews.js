@@ -17,7 +17,12 @@ export const ApplicationViews = () => {
                     props => <Profile {...props} />
                     
                 } />
-                
+                <CategoryProvider>
+                <Route exact path="/categories">
+                    <CategoryList {...props} />
+                    <CategoryForm />
+                </Route>
+            </CategoryProvider>
             
         </ProfileProvider>
     </>

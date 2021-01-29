@@ -8,9 +8,9 @@ import "./Profile.css"
 export const Profile = (props) => {
     const { profile, getProfile } = useContext(ProfileContext)
     // const { leaveEvent } = useContext(EventContext)
-
     useEffect(() => {
         getProfile()
+        console.log(profile)
     }, [])
 
     return (
@@ -23,7 +23,7 @@ export const Profile = (props) => {
                     <h3>Your Info</h3>
                 </header>
                 <div className="profile__name">
-                    Welcome: {profile.gamer && profile.gamer.user.first_name} {profile.gamer && profile.gamer.user.last_name}
+                    Welcome: {profile.first_name} {profile.gamer && profile.last_name}
                 </div>
                 <div className="profile__username">Username: {profile.gamer && profile.gamer.user.username}</div>
                 <div className="profile__bio">About you: {profile.gamer && profile.gamer.bio}</div>
