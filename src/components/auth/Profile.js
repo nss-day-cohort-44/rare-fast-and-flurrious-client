@@ -1,5 +1,5 @@
 import React, { useEffect, useContext } from "react"
-import { EventContext } from "../event/EventProvider.js"
+// import { EventContext } from "../event/EventProvider.js"
 import { HumanDate } from "../utils/HumanDate.js"
 import { ProfileContext } from "./AuthProvider.js"
 import "./Profile.css"
@@ -7,7 +7,7 @@ import "./Profile.css"
 
 export const Profile = (props) => {
     const { profile, getProfile } = useContext(ProfileContext)
-    const { leaveEvent } = useContext(EventContext)
+    // const { leaveEvent } = useContext(EventContext)
 
     useEffect(() => {
         getProfile()
@@ -41,9 +41,9 @@ export const Profile = (props) => {
                                 <div>
                                     <HumanDate date={event.date} /> @ {event.time}
                                 </div>
-                                <button className="btn btn-3"
+                                {/* <button className="btn btn-3"
                                     onClick={() => leaveEvent(event.id).then(getProfile)}
-                                >Leave</button>
+                                >Leave</button> */}
                             </div>
                         })
                     }

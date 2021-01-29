@@ -11,9 +11,17 @@ export const Register = (props) => {
     const verifyPassword = useRef()
     const passwordDialog = useRef()
     const history = useHistory()
-
+    const accountType = 2
+    
     const handleRegister = (e) => {
         e.preventDefault()
+        console.log("Clicked")
+        let createdOn = ""
+        createdOn = new Date()
+        console.log(createdOn)
+        
+
+
 
         if (password.current.value === verifyPassword.current.value) {
             const newUser = {
@@ -21,7 +29,10 @@ export const Register = (props) => {
                 "first_name": firstName.current.value,
                 "last_name": lastName.current.value,
                 "email": email.current.value,
-                "password": password.current.value
+                "password": password.current.value,
+                "created_on": createdOn,
+                "account_type_id": accountType
+
             }
 
             return fetch("http://127.0.0.1:8088/register", {
@@ -34,8 +45,10 @@ export const Register = (props) => {
             })
                 .then(res => res.json())
                 .then(res => {
+                    console.log(res)
                     if ("valid" in res && res.valid) {
-                        localStorage.setItem("rare_user_id", res.token)
+                        localStorage.setItem("app_user_id", res.id)
+                        console.log(props)
                         history.push("/")
                     }
                 })
@@ -44,6 +57,7 @@ export const Register = (props) => {
         }
     }
 
+ 
     return (
         <main style={{ textAlign: "center" }}>
 
