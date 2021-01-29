@@ -2,6 +2,9 @@ import React from "react"
 import { Route } from "react-router-dom"
 import { ProfileProvider } from "./auth/AuthProvider"
 import { Profile } from "./auth/Profile"
+import {PostProvider} from "./posts/PostProvider"
+import {PostList} from "./posts/PostList"
+import {PostDetails} from "./posts/PostDetail"
 
 export const ApplicationViews = () => {
     return <>
@@ -18,7 +21,19 @@ export const ApplicationViews = () => {
                     
                 } />
                 
-            
         </ProfileProvider>
+
+        <PostProvider>
+                <Route exact path="/" render={
+                    props => <PostList {...props} />
+                    
+                } />
+                <Route exact path= "/posts/:postId(\d+)" render= {
+                props => {
+                    return <PostDetails {...props} />
+                }
+                } />
+            
+        </PostProvider>
     </>
 }
