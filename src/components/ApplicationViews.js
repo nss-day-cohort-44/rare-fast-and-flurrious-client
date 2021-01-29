@@ -4,6 +4,8 @@ import { ProfileProvider } from "./auth/AuthProvider"
 import { Profile } from "./auth/Profile"
 import { PostProvider } from "./posts/PostProvider"
 import { PostForm } from "./posts/PostForm"
+import {CommentProvider} from "./comments/CommentProvider"
+import {CommentForm} from "./comments/CommentForm"
 // import { CategoryProvider } from "./CategoryProvider"
 
 export const ApplicationViews = () => {
@@ -18,20 +20,21 @@ export const ApplicationViews = () => {
         <ProfileProvider>
             <Route exact path="/" render={
                 props => <Profile {...props} />
-
             } />
-
-
         </ProfileProvider>
+
+        <CommentProvider>
+            <Route path="/CommentForm" render={
+                props => <CommentForm {...props}/>
+            } />
+        </CommentProvider>
+
 
         {/* <CategoryProvider> */}
         <PostProvider>
             <Route exact path="/PostForm" render={
                 props => <PostForm {...props} />
-
             } />
-
-
         </PostProvider>
         {/* </CategoryProvider> */}
     </>
