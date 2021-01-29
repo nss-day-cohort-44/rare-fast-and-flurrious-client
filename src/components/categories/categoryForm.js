@@ -12,23 +12,24 @@ export const CategoryForm = props => {
     }, [])
 
     const addNewCategory = () => {
-        if (!categories.find( cat => cat.labe === labe)) {
+        console.log("hello")
             addCategory({
-                label: label.current.value
+                label: val.current.value
+            
             })
             .then(getCategories)
-        }
     }
 
     return (
         <>
-            <form>
+            
                 <input type= "text" ref={val} placeholder="New Category"></input>
-                <button type = "submit" onclick={e => {
+                <button type = "submit" onClick={e => {
+                    console.log(categories)
                     e.preventDefault()
                     addNewCategory()
                 }}>Add New Category</button>
-            </form>
+           
 
 
         </>

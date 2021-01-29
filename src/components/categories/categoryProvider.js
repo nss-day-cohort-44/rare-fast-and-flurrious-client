@@ -11,7 +11,7 @@ export const CategoryProvider = props => {
         .then(setCategories)
     }
 
-    const getCategoryById = id => categories.find(cat => cat.id === parseInt(id))
+    
 
     const addCategory = cat => {
         return fetch ("http://localhost:8088/categories", {
@@ -27,7 +27,7 @@ export const CategoryProvider = props => {
     
 
     return <CategoryContext.Provider value = {{
-        categories, getCategories, getCategoryById, addCategory
+        categories, getCategories, addCategory
     }}>
         {props.children}
     </CategoryContext.Provider>
