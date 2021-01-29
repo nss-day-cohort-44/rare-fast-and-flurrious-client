@@ -25,6 +25,7 @@ export const Login = () => {
         })
             .then(res => res.json())
             .then(res => {
+                console.log(res)
                 if ("valid" in res && res.valid) {
                     localStorage.setItem("app_user_id", res.id )
                     history.push("/")
