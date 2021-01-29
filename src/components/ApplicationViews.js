@@ -2,14 +2,27 @@ import React from "react"
 import { Route } from "react-router-dom"
 import { ProfileProvider } from "./auth/AuthProvider"
 import { Profile } from "./auth/Profile"
+import {CategoryProvider} from "./categories/categoryProvider"
+import {CategoryList} from "./categories/categoryList"
+import {CategoryForm} from "./categories/categoryForm"
 import { PostProvider } from "./posts/PostProvider"
 import { PostForm } from "./posts/PostForm"
 import {CommentProvider} from "./comments/CommentProvider"
 import {CommentForm} from "./comments/CommentForm"
 // import { CategoryProvider } from "./CategoryProvider"
 
-export const ApplicationViews = () => {
+export const ApplicationViews = (props) => {
     return <>
+        <ProfileProvider>
+        <Route exact path = "/" render = {
+                    props => <Profile {...props} />
+                } />
+                <CategoryProvider>
+                <Route exact path="/categories">
+                    <CategoryList {...props} />
+                    <CategoryForm />
+                </Route>
+            </CategoryProvider>
 
         <main style={{
             margin: "5rem 2rem",
@@ -29,7 +42,7 @@ export const ApplicationViews = () => {
             } />
         </CommentProvider>
 
-
+        </ProfileProvider>
         {/* <CategoryProvider> */}
         <PostProvider>
             <Route exact path="/PostForm" render={
