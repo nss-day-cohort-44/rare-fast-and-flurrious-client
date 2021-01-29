@@ -14,12 +14,12 @@ export const PostProvider = (props) => {
             headers: {
                 "Content-Type": "application/json"
             },
-            body: JSON.stringify(employee)
+            body: JSON.stringify(post)
         })
-            .then(getPosts)
+        // .then(getPosts)
     }
     return (
-        <PostContext.Provider value={{ posts, setPosts, getPosts, addPost }}>
+        <PostContext.Provider value={{ posts, setPosts, addPost }}>
             {props.children}
         </PostContext.Provider>
     )

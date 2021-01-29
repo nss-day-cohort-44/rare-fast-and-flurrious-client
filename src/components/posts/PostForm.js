@@ -1,11 +1,14 @@
-import React, { useContext, useRef, useEffect } from "react"
+import React, { useContext, useRef, useState } from "react"
 import { PostContext } from "./PostProvider"
-import { CategoryContext } from "../CategoryProvider"
+// import { CategoryContext } from "../CategoryProvider"
 // import "./Post.css"
 
 export const PostForm = (props) => {
+
+    const [selectedCategory, setSelectedCategory] = useState(0)
+
     const { addPost } = useContext(PostContext)
-    const { category } = useContext(CategoryContext)
+    // const { category } = useContext(CategoryContext)
 
     /*
         Create references that can be attached to the input
@@ -22,22 +25,10 @@ export const PostForm = (props) => {
     /*
         Get animal state and location state on initialization.
     */
-    useEffect(() => {
-        getPosts()
-        // .then(getCategories())
-    }, [])
-
-    const handleCategorySelect = () => {
-        //If statement so the drop down element with 0 returns to homepage
-        if (category.current.value === "0") {
-            //This pushes the page view to home
-            props.history.push("/PostDetails")
-
-            //else if statement so the drop down elements go to the id value's selected page when clicked
-        } else if (category.current.value !== 0) {
-            props.history.push(`/landmarks/${city.current.value}`)
-        }
-    }
+    // useEffect(() => {
+    //     getPosts()
+    //     // .then(getCategories())
+    // }, [])
 
     const constructNewPost = () => {
         /*
@@ -50,38 +41,36 @@ export const PostForm = (props) => {
         {
             addPost({
                 user_id: parseInt(localStorage.getItem("app_user_id")),
-                category_id,
+                category_id: category,
                 title,
                 publication_date: currentDate,
-                image_url,
+                image_url: imageUrl,
                 content
             })
+            console.log("add post", addPost)
                 .then(() => props.history.push("/PostDetails"))
         }
     }
 
     return (
         <form className="postForm">
+            <h2 className="postForm__title">New Post</h2>
             <fieldset>
                 <div className="form-group">
                     <label htmlFor="category">Post category: </label>
                     <select defaultValue="0"
-                        onChange={() => {
-                            handleCategorySelect()
-                        }}
-                        name="category" ref={category} id="category" className="form-control">
+                        name="category" ref={category} id="category" className="form-control" onChange={(e) => { setSelectedCategory(+e.target.value) }}>
                         <option value="0">Category Select</option>
-                        {
+                        {/* {
                             category.map(c => (
                                 <option key={c.id} value={c.id}>
                                     {c.label}
                                 </option>
                             ))
-                        }
+                        } */}
                     </select >
                 </div>
             </fieldset>
-            <h2 className="postForm__title">New Employee</h2>
             <fieldset>
                 <div className="form-group">
                     <label htmlFor="postTitle">Post title: </label>
@@ -98,7 +87,7 @@ export const PostForm = (props) => {
             <fieldset>
                 <div className="form-group">
                     <label htmlFor="postContent">Post Content: </label>
-                    <textarea value={text} id="postContent" ref={content} className="form-control"
+                    <textarea type="text" id="postContent" ref={content} className="form-control"
                         rows="5" cols="70" >
                     </textarea>
                 </div>

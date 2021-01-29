@@ -2,9 +2,9 @@ import React from "react"
 import { Route } from "react-router-dom"
 import { ProfileProvider } from "./auth/AuthProvider"
 import { Profile } from "./auth/Profile"
-import { PostProvider } from "./PostProvider"
-import { PostForm } from "./PostForm"
-import { CategoryProvider } from "./CategoryProvider"
+import { PostProvider } from "./posts/PostProvider"
+import { PostForm } from "./posts/PostForm"
+// import { CategoryProvider } from "./CategoryProvider"
 
 export const ApplicationViews = () => {
     return <>
@@ -24,15 +24,15 @@ export const ApplicationViews = () => {
 
         </ProfileProvider>
 
-        <CategoryProvider>
-            <PostProvider>
-                <Route exact path="/PostDetails" render={
-                    props => <PostForm {...props} />
+        {/* <CategoryProvider> */}
+        <PostProvider>
+            <Route exact path="/PostForm" render={
+                props => <PostForm {...props} />
 
-                } />
+            } />
 
 
-            </PostProvider>
-        </CategoryProvider>
+        </PostProvider>
+        {/* </CategoryProvider> */}
     </>
 }
