@@ -1,14 +1,14 @@
-import React, { useContext, useRef, useState } from "react"
+import React, { useContext, useRef, useState, useEffect } from "react"
 import { PostContext } from "./PostProvider"
-// import { CategoryContext } from "../CategoryProvider"
+import { CategoryContext } from "../categories/categoryProvider"
 // import "./Post.css"
 
 export const PostForm = (props) => {
 
     const [selectedCategory, setSelectedCategory] = useState(0)
 
-    const { addPost } = useContext(PostContext)
-    // const { category } = useContext(CategoryContext)
+    const { getPosts, addPost } = useContext(PostContext)
+    const { categories, getCategories } = useContext(CategoryContext)
 
     /*
         Create references that can be attached to the input
@@ -20,15 +20,16 @@ export const PostForm = (props) => {
     const title = useRef(null)
     const content = useRef(null)
     const imageUrl = useRef(null)
-    const category = useRef(null)
+    // const categories = useRef(null)
 
+    let category_id = selectedCategory
     /*
         Get animal state and location state on initialization.
     */
-    // useEffect(() => {
-    //     getPosts()
-    //     // .then(getCategories())
-    // }, [])
+    useEffect(() => {
+        getPosts()
+            .then(getCategories())
+    }, [])
 
     const constructNewPost = () => {
         /*
@@ -41,14 +42,14 @@ export const PostForm = (props) => {
         {
             addPost({
                 user_id: parseInt(localStorage.getItem("app_user_id")),
-                category_id: category,
+                category_id: category_id,
                 title,
                 publication_date: currentDate,
                 image_url: imageUrl,
                 content
             })
             console.log("add post", addPost)
-                .then(() => props.history.push("/PostDetails"))
+                .then(() => props.history.push("/posts/:id(\d+)"))
         }
     }
 
@@ -59,15 +60,17 @@ export const PostForm = (props) => {
                 <div className="form-group">
                     <label htmlFor="category">Post category: </label>
                     <select defaultValue="0"
-                        name="category" ref={category} id="category" className="form-control" onChange={(e) => { setSelectedCategory(+e.target.value) }}>
+                        name="category" ref={categories} id="category" className="form-control" onChange={(e) => { setSelectedCategory(+e.target.value) }}>
                         <option value="0">Category Select</option>
-                        {/* {
-                            category.map(c => (
+                        {
+                            categories.map(c => (
                                 <option key={c.id} value={c.id}>
                                     {c.label}
                                 </option>
                             ))
-                        } */}
+
+                        }
+                        <>console.log("categories", categories)</>
                     </select >
                 </div>
             </fieldset>
