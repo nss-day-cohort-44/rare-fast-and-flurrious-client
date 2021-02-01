@@ -2,25 +2,16 @@ import React from "react"
 import { Route } from "react-router-dom"
 import { ProfileProvider } from "./auth/AuthProvider"
 import { Profile } from "./auth/Profile"
-<<<<<<< HEAD
-import {PostProvider} from "./posts/PostProvider"
-import {PostList} from "./posts/PostList"
-import {PostDetails} from "./posts/PostDetail"
-import {CategoryProvider} from "./categories/categoryProvider"
-import {CategoryList} from "./categories/categoryList"
-import {CategoryForm} from "./categories/categoryForm"
-
-=======
 import { PostProvider } from "./posts/PostProvider"
 import { PostList } from "./posts/PostList"
 import { PostDetails } from "./posts/PostDetail"
 import { CategoryProvider } from "./categories/categoryProvider"
 import { CategoryList } from "./categories/categoryList"
 import { CategoryForm } from "./categories/categoryForm"
->>>>>>> bc74df568441ae971e974ee683ad55b660f82e05
 import { PostForm } from "./posts/PostForm"
 import { CommentProvider } from "./comments/CommentProvider"
 import { CommentForm } from "./comments/CommentForm"
+import { UserPosts } from "./posts/UsersPosts"
 
 export const ApplicationViews = (props) => {
     return <>
@@ -49,6 +40,10 @@ export const ApplicationViews = (props) => {
             <PostProvider>
                 <Route exact path="/posts" render={
                     props => <PostList {...props} />
+
+                } />
+                <Route exact path="/myposts" render={
+                    props => <UserPosts {...props} />
 
                 } />
                 <Route exact path="/posts/:id(\d+)" render={

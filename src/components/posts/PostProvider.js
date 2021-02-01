@@ -19,6 +19,13 @@ export const PostProvider = (props) => {
         .then(setPost)
     }
 
+    const getPostsByUserId = (userId) =>{
+        userId = localStorage.getItem("app_user_id")
+        return fetch(`http://localhost:8088/posts?user_id=${userId}`)
+            .then(res => res.json())
+            .then(setPosts)
+    }
+
     const deletePost = (id) => {
         return fetch(`http://localhost:8088/post/${id}`, {
             method: "DELETE"
@@ -39,7 +46,7 @@ export const PostProvider = (props) => {
   
     return(
         <PostContext.Provider value={{
-           post, setPost,  posts, setPosts, getPosts, getPostById, deletePost, addPost
+           post, setPost,  posts, setPosts, getPosts, getPostById, deletePost, addPost, getPostsByUserId
             }}>
             {props.children}
         </PostContext.Provider>
