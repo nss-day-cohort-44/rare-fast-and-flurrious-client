@@ -43,10 +43,10 @@ export const PostForm = (props) => {
             addPost({
                 user_id: parseInt(localStorage.getItem("app_user_id")),
                 category_id: category_id,
-                title,
+                title: title.current.value,
                 publication_date: currentDate,
-                image_url: imageUrl,
-                content
+                image_url: imageUrl.current.value,
+                content: content.current.value
             })
             console.log("add post", addPost)
                 .then(() => props.history.push("/posts/:id(\d+)"))

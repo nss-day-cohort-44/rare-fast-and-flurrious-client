@@ -27,13 +27,14 @@ export const PostProvider = (props) => {
     }
 
     const deletePost = (id) => {
-        return fetch(`http://localhost:8088/post/${id}`, {
+        return fetch(`http://localhost:8088/posts/${id}`, {
             method: "DELETE"
         })
         .then(getPosts)
     }
 
     const addPost = post => {
+        
         return fetch("http://localhost:8088/posts", {
             method: "POST",
             headers: {
@@ -41,7 +42,7 @@ export const PostProvider = (props) => {
             },
             body: JSON.stringify(post)
         })
-        // .then(getPosts)
+        .then(getPosts)
     }
   
     return(

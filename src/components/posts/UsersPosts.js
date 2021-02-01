@@ -16,6 +16,7 @@ export const UserPosts = (props) => {
 return (
     <>
     <h2>My Posts</h2>
+    <button clasName="Create_post" onClick={() => props.history.push("/PostForm")}>Create Post</button>
     {
                 posts.map(p => <Post key={p.id} post={p} props={props}/>)
             }
