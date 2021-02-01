@@ -20,7 +20,7 @@ export const PostProvider = (props) => {
     }
 
     const deletePost = (id) => {
-        return fetch(`http://localhost:8088/post/${id}`, {
+        return fetch(`http://localhost:8088/posts/${id}`, {
             method: "DELETE"
         })
         .then(getPosts)
