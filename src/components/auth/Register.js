@@ -48,7 +48,6 @@ export const Register = (props) => {
                     console.log(res)
                     if ("valid" in res && res.valid) {
                         localStorage.setItem("app_user_id", res.id)
-                        
                         console.log(props)
                         history.push("/")
                     }
@@ -58,6 +57,7 @@ export const Register = (props) => {
         }
     }
 
+ 
     return (
         <main style={{ textAlign: "center" }}>
 
