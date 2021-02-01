@@ -5,15 +5,33 @@ import { Profile } from "./auth/Profile"
 import {PostProvider} from "./posts/PostProvider"
 import {PostList} from "./posts/PostList"
 import {PostDetails} from "./posts/PostDetail"
+import {CategoryProvider} from "./categories/categoryProvider"
+import {CategoryList} from "./categories/categoryList"
+import {CategoryForm} from "./categories/categoryForm"
+import { PostProvider } from "./posts/PostProvider"
+import { PostForm } from "./posts/PostForm"
+import {CommentProvider} from "./comments/CommentProvider"
+import {CommentForm} from "./comments/CommentForm"
+// import { CategoryProvider } from "./CategoryProvider"
 
-export const ApplicationViews = () => {
+export const ApplicationViews = (props) => {
     return <>
-        
+        <ProfileProvider>
+        <Route exact path = "/" render = {
+                    props => <Profile {...props} />
+                } />
+                <CategoryProvider>
+                <Route exact path="/categories">
+                    <CategoryList {...props} />
+                    <CategoryForm />
+                </Route>
+            </CategoryProvider>
+
         <main style={{
             margin: "5rem 2rem",
             lineHeight: "1.75rem"
         }}>
-        
+
         </main>
         <ProfileProvider>
         <Route exact path = "/" render = {
@@ -34,5 +52,24 @@ export const ApplicationViews = () => {
                 } />
             
         </PostProvider>
+            <Route exact path="/" render={
+                props => <Profile {...props} />
+            } />
+        </ProfileProvider>
+
+        <CommentProvider>
+            <Route path="/CommentForm" render={
+                props => <CommentForm {...props}/>
+            } />
+        </CommentProvider>
+
+        
+        {/* <CategoryProvider> */}
+        <PostProvider>
+            <Route exact path="/PostForm" render={
+                props => <PostForm {...props} />
+            } />
+        </PostProvider>
+        {/* </CategoryProvider> */}
     </>
 }
