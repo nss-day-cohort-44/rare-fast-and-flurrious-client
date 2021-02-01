@@ -1,6 +1,6 @@
 import React, { useContext, useRef, useState } from "react"
 import { PostContext } from "./PostProvider"
-// import { CategoryContext } from "../CategoryProvider"
+import { CategoryContext } from "../CategoryProvider"
 // import "./Post.css"
 
 export const PostForm = (props) => {
@@ -8,7 +8,7 @@ export const PostForm = (props) => {
     const [selectedCategory, setSelectedCategory] = useState(0)
 
     const { addPost } = useContext(PostContext)
-    // const { category } = useContext(CategoryContext)
+    const { category } = useContext(CategoryContext)
 
     /*
         Create references that can be attached to the input
@@ -25,10 +25,10 @@ export const PostForm = (props) => {
     /*
         Get animal state and location state on initialization.
     */
-    // useEffect(() => {
-    //     getPosts()
-    //     // .then(getCategories())
-    // }, [])
+    useEffect(() => {
+        getPosts()
+            .then(getCategories())
+    }, [])
 
     const constructNewPost = () => {
         /*
@@ -61,13 +61,13 @@ export const PostForm = (props) => {
                     <select defaultValue="0"
                         name="category" ref={category} id="category" className="form-control" onChange={(e) => { setSelectedCategory(+e.target.value) }}>
                         <option value="0">Category Select</option>
-                        {/* {
+                        {
                             category.map(c => (
                                 <option key={c.id} value={c.id}>
                                     {c.label}
                                 </option>
                             ))
-                        } */}
+                        }
                     </select >
                 </div>
             </fieldset>
