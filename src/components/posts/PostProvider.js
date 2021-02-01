@@ -19,6 +19,13 @@ export const PostProvider = (props) => {
         .then(setPost)
     }
 
+    const getPostsByUserId = (userId) =>{
+        userId = localStorage.getItem("app_user_id")
+        return fetch(`http://localhost:8088/posts?user_id=${userId}`)
+            .then(res => res.json())
+            .then(setPosts)
+    }
+
     const deletePost = (id) => {
         return fetch(`http://localhost:8088/posts/${id}`, {
             method: "DELETE"
@@ -27,6 +34,7 @@ export const PostProvider = (props) => {
     }
 
     const addPost = post => {
+        
         return fetch("http://localhost:8088/posts", {
             method: "POST",
             headers: {
@@ -34,12 +42,12 @@ export const PostProvider = (props) => {
             },
             body: JSON.stringify(post)
         })
-        // .then(getPosts)
+        .then(getPosts)
     }
   
     return(
         <PostContext.Provider value={{
-           post, setPost,  posts, setPosts, getPosts, getPostById, deletePost, addPost
+           post, setPost,  posts, setPosts, getPosts, getPostById, deletePost, addPost, getPostsByUserId
             }}>
             {props.children}
         </PostContext.Provider>
