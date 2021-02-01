@@ -7,7 +7,7 @@ export const PostForm = (props) => {
 
     const [selectedCategory, setSelectedCategory] = useState(0)
 
-    const { getPosts, addPost } = useContext(PostContext)
+    const { getPosts, addPost, post } = useContext(PostContext)
     const { categories, getCategories } = useContext(CategoryContext)
 
     /*
@@ -46,10 +46,14 @@ export const PostForm = (props) => {
                 title: title.current.value,
                 publication_date: currentDate,
                 image_url: imageUrl.current.value,
-                content: content.current.value
+                content: content.current.value,
+                approved: true
             })
-            console.log("add post", addPost)
-                .then(() => props.history.push("/posts/:id(\d+)"))
+                // console.log("add post", post)
+                .then((post) => {
+                    props.history.push(`/posts/${post.id}`)
+
+                })
         }
     }
 
