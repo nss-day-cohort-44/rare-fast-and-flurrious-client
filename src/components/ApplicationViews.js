@@ -8,7 +8,7 @@ import {PostDetails} from "./posts/PostDetail"
 import {CategoryProvider} from "./categories/categoryProvider"
 import {CategoryList} from "./categories/categoryList"
 import {CategoryForm} from "./categories/categoryForm"
-import { PostProvider } from "./posts/PostProvider"
+
 import { PostForm } from "./posts/PostForm"
 import {CommentProvider} from "./comments/CommentProvider"
 import {CommentForm} from "./comments/CommentForm"
