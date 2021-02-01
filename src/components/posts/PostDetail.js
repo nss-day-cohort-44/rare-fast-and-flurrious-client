@@ -2,18 +2,22 @@ import React, { useContext, useEffect, useState } from "react"
 import {PostContext} from "./PostProvider"
 
 export const PostDetails = (props) => {
-    const { getPosts, getPostById, deletePost} = useContext(PostContext)
-    const [post, setPost] = useState({})
+    const {post, setPost,  posts, setPosts, getPosts, getPostById, deletePost} = useContext(PostContext)
+    // const [post, setPost] = useState({})
 
     useEffect(() => {
-        const postId = parseInt(props.match.params.postId)
+        const postId = parseInt(props.match.params.id)
+        
         getPostById(postId)
-         .then(setPost)
+        .then(setPost(props.location.state.chosenPost))
+        // console.log(post)
 
     }, [])
+    console.log(post)
     return (
         <>
             <section className="post">
+                <h3>Post Detail</h3>
                 <h3 className="post__title">{post.title}</h3>
                 <h3 className="post__title">{post.content}</h3>
                 <h3 className="post__title">{post.publication_date}</h3>

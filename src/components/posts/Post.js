@@ -1,10 +1,13 @@
 import  React from "react"
 import {Link} from "react-router-dom"
 
-export const Post = ({post}) => (
+export const Post = ({post, props}) => {
+    if (localStorage.getItem("app_user_id")) {
+        console.log(post)
+    return (
     <section className="postCard">
         <h3>
-          <Link to={{pathname: `/post/${post.id}`}}>
+          <Link to={{pathname: `/posts/${post.id}`, state:{chosenPost: post}}}>
               Title: {post.title}
           </Link>
         </h3>
@@ -16,8 +19,15 @@ export const Post = ({post}) => (
         <p>Content: {post.content}</p>
         <p>Approved: {post.approved}</p>
     </section>
-)
-
+    )
+} else {
+    return(
+        <section>
+           <p>No post available. </p> 
+        </section>
+    )
+}
+}
 
 // SELECT
 // p.id,

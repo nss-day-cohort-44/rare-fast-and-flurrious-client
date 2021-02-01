@@ -24,14 +24,13 @@ export const ApplicationViews = () => {
         </ProfileProvider>
 
         <PostProvider>
-                <Route exact path="/" render={
+                <Route exact path="/posts" render={
                     props => <PostList {...props} />
                     
                 } />
-                <Route exact path= "/posts/:postId(\d+)" render= {
-                props => {
-                    return <PostDetails {...props} />
-                }
+                <Route exact path= "/posts/:id(\d+)" render= {
+                props => <PostDetails {...props} />
+                
                 } />
             
         </PostProvider>
