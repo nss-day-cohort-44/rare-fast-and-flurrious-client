@@ -1,19 +1,17 @@
 import React, { useContext, useEffect, useState } from "react"
-import {PostContext} from "./PostProvider"
+import { PostContext } from "./PostProvider"
 
 export const PostDetails = (props) => {
-    const {post, setPost,  posts, setPosts, getPosts, getPostById, deletePost} = useContext(PostContext)
+    const { post, setPost, getPostById, deletePost } = useContext(PostContext)
     // const [post, setPost] = useState({})
 
     useEffect(() => {
         const postId = parseInt(props.match.params.id)
-        
+
         getPostById(postId)
-        .then(setPost(props.location.state.chosenPost))
-        // console.log(post)
+            .then(setPost(post))
 
     }, [])
-    console.log(post)
     return (
         <>
             <section className="post">
@@ -24,33 +22,19 @@ export const PostDetails = (props) => {
                 <h3 className="post__title">{post.user_id}</h3>
 
                 <button className="btn--release"
-                  onClick={() => {
-                 
-                    deletePost(post.id)
-                .then(() => {
-                    props.history.push("/posts")
-                })
-                     }}
-              >Delete Post</button>
+                    onClick={() => {
+
+                        deletePost(post.id)
+                            .then(() => {
+                                props.history.push("/posts")
+                            })
+                    }}
+                >Delete Post</button>
 
             </section>
-            
-    
-         </>
+
+
+        </>
     )
 }
 
-
-
-
-// SELECT
-// p.id,
-// p.user_id,
-// p.category_id,
-// p.title,
-// p.publication_date,
-// p.image_url,
-// p.content,
-// p.approved
-// FROM posts p
-// """)

@@ -74,7 +74,6 @@ export const PostForm = (props) => {
                             ))
 
                         }
-                        <>console.log("categories", categories)</>
                     </select >
                 </div>
             </fieldset>
