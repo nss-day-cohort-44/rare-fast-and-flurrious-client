@@ -28,17 +28,4 @@ You are going to need a minimum of two terminal sessions open for this project a
 ## ERD
 [ERD for this project](https://dbdiagram.io/d/5f885a013a78976d7b77cb74)
 
-## Wireframes
-![](./images/wireframe-login.png)
-![](./images/wireframe-register.png)
-![](./images/wireframe-create-post.png)
-![](./images/wireframe-edit-post.png)
-![](./images/wireframe-all-posts.png)
-![](./images/wireframe-post-view.png)
-![](./images/wireframe-post-detail.png)
-![](./images/wireframe-comments.png)
-![](./images/wireframe-post-by-author.png)
-![](./images/wireframe-profile.png)
-![](./images/wireframe-category-manager.png)
-![](./images/wireframe-tag-manager.png)
 
