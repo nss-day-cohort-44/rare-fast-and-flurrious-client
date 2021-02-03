@@ -21,6 +21,10 @@ export const PostDetails = (props) => {
                 <h3 className="post__title">{post.publication_date}</h3>
                 <h3 className="post__title">{post.user_id}</h3>
 
+                <button onClick={() => {
+                    props.history.push(`/posts/edit/${post.id}`)
+                }}>Edit Post!</button>
+
                 <button className="btn--release"
                     onClick={() => {
 

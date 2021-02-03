@@ -58,6 +58,10 @@ export const ApplicationViews = (props) => {
                     props => <PostForm {...props} />
                 } />
 
+                <Route path="/Posts/edit/:postId(\d+)" render={
+                    props => <PostForm {...props} />
+                } />
+
             </PostProvider>
         </CategoryProvider>
 
