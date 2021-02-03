@@ -2,19 +2,19 @@ import React from "react"
 import { Route } from "react-router-dom"
 import { ProfileProvider } from "./auth/AuthProvider"
 import { Profile } from "./auth/Profile"
-import {PostProvider} from "./posts/PostProvider"
-import {PostList} from "./posts/PostList"
-import {PostDetails} from "./posts/PostDetail"
-import {CategoryProvider} from "./categories/categoryProvider"
-import {CategoryList} from "./categories/categoryList"
-import {CategoryForm} from "./categories/categoryForm"
+import { PostProvider } from "./posts/PostProvider"
+import { PostList } from "./posts/PostList"
+import { PostDetails } from "./posts/PostDetail"
+import { CategoryProvider } from "./categories/categoryProvider"
+import { CategoryList } from "./categories/categoryList"
+import { CategoryForm } from "./categories/categoryForm"
 import { PostForm } from "./posts/PostForm"
 import { CommentProvider } from "./comments/CommentProvider"
 import { CommentForm } from "./comments/CommentForm"
 import { UserPosts } from "./posts/UsersPosts"
-import {TagList} from "./tags/tagList"
-import {TagForm} from "./tags/tagForm"
-import {TagProvider} from "./tags/tagProvider"
+import { TagList } from "./tags/tagList"
+import { TagForm } from "./tags/tagForm"
+import { TagProvider } from "./tags/tagProvider"
 
 export const ApplicationViews = (props) => {
     return <>
@@ -36,12 +36,23 @@ export const ApplicationViews = (props) => {
                 props => <Profile {...props} />
 
             } />
-
         </ProfileProvider>
 
         <CategoryProvider>
             <PostProvider>
                 <Route exact path="/posts" render={
+                    /*  props =
+                    {
+                        match: {},
+                        location: {},
+                        history: {}
+                    }
+
+                        ...props(spread operator) =
+                    history: {}
+                    match: {}
+                    location: {}
+                    */
                     props => <PostList {...props} />
 
                 } />
@@ -53,32 +64,32 @@ export const ApplicationViews = (props) => {
                     props => <PostDetails {...props} />
 
                 } />
-
                 <Route exact path="/PostForm" render={
                     props => <PostForm {...props} />
-                } />
 
+                } />
                 <Route path="/Posts/edit/:postId(\d+)" render={
                     props => <PostForm {...props} />
-                } />
 
+                } />
             </PostProvider>
         </CategoryProvider>
 
         <TagProvider>
             <Route exact path="/tags" render={
-                    props => <TagList {...props} />
+                props => <TagList {...props} />
 
-                } />
-                <Route exact path="/tags" render={
-                    props => <TagForm {...props} />
+            } />
+            <Route exact path="/tags" render={
+                props => <TagForm {...props} />
 
-                } />
+            } />
         </TagProvider>
 
         <CommentProvider>
             <Route path="/CommentForm" render={
                 props => <CommentForm {...props} />
+
             } />
         </CommentProvider>
     </>

@@ -1,17 +1,21 @@
 import React, { useContext, useEffect, useState } from "react"
 import { PostContext } from "./PostProvider"
 
+//This module renders the detail page for each post
+
 export const PostDetails = (props) => {
-    const { post, setPost, getPostById, deletePost } = useContext(PostContext)
-    // const [post, setPost] = useState({})
+    const { getPostById, deletePost } = useContext(PostContext)
+    const [post, setPost] = useState({})
 
     useEffect(() => {
         const postId = parseInt(props.match.params.id)
-
+        // console.log("props", props)
         getPostById(postId)
-            .then(setPost(post))
 
+            // Need below .then if you do not setPost in the postProvider
+            .then(setPost)
     }, [])
+
     return (
         <>
             <section className="post">
@@ -36,7 +40,6 @@ export const PostDetails = (props) => {
                 >Delete Post</button>
 
             </section>
-
 
         </>
     )
