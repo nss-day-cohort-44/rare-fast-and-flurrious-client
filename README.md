@@ -1,31 +1,44 @@
-# Rare: The Publishing Platform for the Discerning Writer
+# Rare Publishing Platform Notes
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Setup
+You are going to need a minimum of two terminal sessions open for this project at all times. Go ahead and open two now.
 
-## Utilities
+## Project Directory
 
-In the `utils` directory, there is a **`HumanDate`** component that you can use anywhere in your application to display a human-friendly date instead of the unfriendly format that is stored in the API database.
+1. In the first terminal, make a directory on your system for the code for this project. For example, `~/workspace/python/rare`.
+1. `cd` to that directory.
+1. Create two sub-directories.
+    1. `client`
+    1. `server`
 
+## Client Setup
 
-## Available Scripts
+1. In the same terminal session, `cd` to the client directory.
+1. `git clone git@github.com:nss-day-cohort-44/rare-stucco-turtles.git .` <-- note the single dot at the end.
+1. `npm install` to get all required packages installed for the React client.
+1. `npm start`
 
-In the project directory, you can run:
+## Server Setup
 
-### `yarn start`
+1. In the second terminal session, `cd` into the `rare/server` directory.
+1. `pipenv shell`
+1. `pipenv install watchgod autopep8`
+1. `watchgod request_handler.main`
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## ERD
+[ERD for this project](https://dbdiagram.io/d/5f885a013a78976d7b77cb74)
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
-
-### `yarn build`
-
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## Wireframes
+![](./images/wireframe-login.png)
+![](./images/wireframe-register.png)
+![](./images/wireframe-create-post.png)
+![](./images/wireframe-edit-post.png)
+![](./images/wireframe-all-posts.png)
+![](./images/wireframe-post-view.png)
+![](./images/wireframe-post-detail.png)
+![](./images/wireframe-comments.png)
+![](./images/wireframe-post-by-author.png)
+![](./images/wireframe-profile.png)
+![](./images/wireframe-category-manager.png)
+![](./images/wireframe-tag-manager.png)
 
