@@ -68,11 +68,14 @@ export const PostForm = (props) => {
                 title: title.current.value,
                 publication_date: currentDate,
                 image_url: imageUrl.current.value,
-                content: content.current.value
+                content: content.current.value,
+                approved: true
             })
-            // console.log("add post", addPost)
-                // .then(() => props.history.push("/posts/:id(\d+)"))
-                .then(() => props.history.push("/posts"))
+                // console.log("add post", post)
+                .then((post) => {
+                    props.history.push(`/posts/${post.id}`)
+
+                })
         }
     }
 
@@ -97,7 +100,6 @@ export const PostForm = (props) => {
                             ))
 
                         }
-                        {/* <>console.log("categories", categories)</> */}
                     </select >
                 </div>
             </fieldset>

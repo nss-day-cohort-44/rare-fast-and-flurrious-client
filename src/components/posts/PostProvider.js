@@ -9,17 +9,17 @@ export const PostProvider = (props) => {
 
     const getPosts = () => {
         return fetch("http://localhost:8088/posts")
-        .then(res => res.json())
-        .then(setPosts)
+            .then(res => res.json())
+            .then(setPosts)
     }
 
     const getPostById = (id) => {
         return fetch(`http://localhost:8088/posts/${id}`)
-        .then(res => res.json())
-        .then(setPost)
+            .then(res => res.json())
+            .then(setPost)
     }
 
-    const getPostsByUserId = (userId) =>{
+    const getPostsByUserId = (userId) => {
         userId = localStorage.getItem("app_user_id")
         return fetch(`http://localhost:8088/posts?user_id=${userId}`)
             .then(res => res.json())
@@ -30,11 +30,11 @@ export const PostProvider = (props) => {
         return fetch(`http://localhost:8088/posts/${id}`, {
             method: "DELETE"
         })
-        .then(getPosts)
+            .then(getPosts)
     }
 
     const addPost = post => {
-        
+
         return fetch("http://localhost:8088/posts", {
             method: "POST",
             headers: {
@@ -42,7 +42,8 @@ export const PostProvider = (props) => {
             },
             body: JSON.stringify(post)
         })
-        .then(getPosts)
+            .then(res => res.json())
+
     }
 
     const updatePost = newPost => {
@@ -62,7 +63,7 @@ export const PostProvider = (props) => {
             }}>
             {props.children}
         </PostContext.Provider>
-      )
-    }
+    )
+}
 
 
