@@ -17,14 +17,14 @@ export const NavBar = () => {
             <li className="navbar__item">
                 <Link className="navbar__link" to="/myposts">My Posts</Link>
             </li>
-            <li className= "navbar__item">
+            <li className="navbar__item">
                 <Link className="navbar__link" to="/categories">Category Management</Link>
             </li>
-            <li className= "navbar__item">
+            <li className="navbar__item">
                 <Link className="navbar__link" to="/tags">Tag Management</Link>
             </li>
             {
-                (localStorage.getItem("app_user_id") !== null) ?
+                (localStorage.getItem("app_user_id") !== null) ? //? is similar to an if statement
                     <li className="nav-item">
                         <button className="nav-link fakeLink"
                             onClick={() => {
@@ -32,7 +32,7 @@ export const NavBar = () => {
                                 history.push({ pathname: "/" })
                             }}
                         >Logout</button>
-                    </li> :
+                    </li> : // : is similar to an else statement
                     <>
                         <li className="nav-item">
                             <Link className="nav-link" to="/login">Login</Link>

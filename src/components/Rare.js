@@ -5,6 +5,8 @@ import { NavBar } from "./nav/NavBar"
 import { Login } from "./auth/Login"
 import { Register } from "./auth/Register"
 
+
+// Determine if user is authenticated by presence of the app_user_id key in local storage
 export const Rare = () => (
     <>
         <Route render={() => {
@@ -30,7 +32,7 @@ export const Rare = () => (
             if (localStorage.getItem("app_user_id")) {
                 return <Redirect to="/" />
             } else {
-                return <Register/>
+                return <Register />
             }
         }} />
     </>

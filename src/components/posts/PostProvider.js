@@ -1,24 +1,28 @@
 import React from "react"
 import { useState } from "react"
 
+
+//This module is responsible for all methods for fetching posts from server
 export const PostContext = React.createContext()
 
 export const PostProvider = (props) => {
     const [posts, setPosts] = useState([])
     const [post, setPost] = useState({})
 
+    //method to get posts from server
     const getPosts = () => {
         return fetch("http://localhost:8088/posts")
             .then(res => res.json())
             .then(setPosts)
     }
 
+    //method to get post by the id from server
     const getPostById = (id) => {
         return fetch(`http://localhost:8088/posts/${id}`)
             .then(res => res.json())
-            .then(setPost)
     }
 
+    //method to get posts by the user id that created the post from server
     const getPostsByUserId = (userId) => {
         userId = localStorage.getItem("app_user_id")
         return fetch(`http://localhost:8088/posts?user_id=${userId}`)
@@ -26,6 +30,7 @@ export const PostProvider = (props) => {
             .then(setPosts)
     }
 
+    //method to delete posts from server
     const deletePost = (id) => {
         return fetch(`http://localhost:8088/posts/${id}`, {
             method: "DELETE"
@@ -33,6 +38,7 @@ export const PostProvider = (props) => {
             .then(getPosts)
     }
 
+    //method to create a post to add to the server
     const addPost = post => {
 
         return fetch("http://localhost:8088/posts", {
@@ -46,21 +52,22 @@ export const PostProvider = (props) => {
 
     }
 
+    //method to edit posts on the server
     const updatePost = newPost => {
         return fetch(`http://localhost:8088/posts/${newPost.id}`, {
-          method: "PUT",
-          headers: {
-            "Content-Type": "application/json"
-          },
-          body: JSON.stringify(newPost)
+            method: "PUT",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(newPost)
         })
-          .then(getPosts)
-      }
-  
-    return(
+            .then(getPosts)
+    }
+
+    return (
         <PostContext.Provider value={{
-           post, setPost,  posts, setPosts, getPosts, getPostById, deletePost, addPost, getPostsByUserId, updatePost
-            }}>
+            post, setPost, posts, setPosts, getPosts, getPostById, deletePost, addPost, getPostsByUserId, updatePost
+        }}>
             {props.children}
         </PostContext.Provider>
     )
