@@ -41,7 +41,7 @@ export const PostProvider = (props) => {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        Authorization: `Token ${localStorage.getItem("lu_token")}`,
+        Authorization: `Token ${localStorage.getItem("app_userId")}`,
       },
       body: JSON.stringify(post),
     }).then((res) => res.json());
@@ -53,6 +53,7 @@ export const PostProvider = (props) => {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
+        Authorization: `Token ${localStorage.getItem("app_userId")}`,
       },
       body: JSON.stringify(newPost),
     }).then(getPosts);
