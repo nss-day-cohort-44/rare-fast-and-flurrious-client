@@ -16,8 +16,16 @@ export const CommentProvider = (props) => {
     });
     // .then(getComments) Issue #21
   };
+
+  const getComment = () => {
+    return fetch("http://localhost:8000/comments")
+      .then((res) => res.json())
+      .then(setComment);
+  };
   return (
-    <CommentContext.Provider value={{ comment, setComment, addComment }}>
+    <CommentContext.Provider
+      value={{ comment, setComment, addComment, getComment }}
+    >
       {props.children}
     </CommentContext.Provider>
   );
