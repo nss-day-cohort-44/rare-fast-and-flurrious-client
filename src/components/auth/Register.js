@@ -2,23 +2,24 @@ import React, { useRef } from "react"
 import { Link, useHistory } from "react-router-dom"
 import "./Auth.css"
 
-export const Register = (props) => {
+export const Register = () => {
     const firstName = useRef()
     const lastName = useRef()
     const email = useRef()
-    const bio = useRef()
     const password = useRef()
     const verifyPassword = useRef()
     const passwordDialog = useRef()
     const history = useHistory()
     const accountType = 2
+    const bio = React.createRef()
     
     const handleRegister = (e) => {
         e.preventDefault()
         console.log("Clicked")
-        let createdOn = ""
-        createdOn = new Date()
-        console.log(createdOn)
+        // let createdOn = ""
+        // createdOn = new Date()
+        // console.log(createdOn)
+
         
 
 
@@ -28,14 +29,15 @@ export const Register = (props) => {
                 "username": email.current.value,
                 "first_name": firstName.current.value,
                 "last_name": lastName.current.value,
+                "bio": bio.current.value,
                 "email": email.current.value,
                 "password": password.current.value,
-                "created_on": createdOn,
+                // "created_on": createdOn,
                 "account_type_id": accountType
 
             }
 
-            return fetch("http://127.0.0.1:8088/register", {
+            return fetch("http://127.0.0.1:8000/register", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
@@ -46,9 +48,8 @@ export const Register = (props) => {
                 .then(res => res.json())
                 .then(res => {
                     console.log(res)
-                    if ("valid" in res && res.valid) {
-                        localStorage.setItem("app_user_id", res.id)
-                        console.log(props)
+                    if ("token" in res) {
+                        localStorage.setItem("app_user_id", res.token)
                         history.push("/")
                     }
                 })
@@ -87,6 +88,10 @@ export const Register = (props) => {
                 <fieldset>
                     <label htmlFor="verifyPassword"> Verify Password </label>
                     <input ref={verifyPassword} type="password" name="verifyPassword" className="form-control" placeholder="Verify password" required />
+                </fieldset>
+                <fieldset>
+                    <label htmlFor="verifyPassword"> Bio </label>
+                    <textarea ref={bio} name="bio" className="form-control" placeholder="Let other gamers know a little bit about you..." />
                 </fieldset>
                 <fieldset style={{
                     textAlign: "center"

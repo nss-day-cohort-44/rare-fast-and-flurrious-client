@@ -11,6 +11,7 @@ export const Login = () => {
   const handleLogin = (e) => {
     e.preventDefault();
 
+<<<<<<< HEAD
     return fetch("http://127.0.0.1:8000/login", {
       method: "POST",
       headers: {
@@ -34,6 +35,31 @@ export const Login = () => {
         }
       });
   };
+=======
+        return fetch("http://127.0.0.1:8000/login", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                "Accept": "application/json"
+            },
+            body: JSON.stringify({
+                username: email.current.value,
+                password: password.current.value
+            })
+        })
+            .then(res => res.json())
+            .then(res => {
+                console.log(res)
+                if ("valid" in res && res.valid && "token" in res) {
+                    localStorage.setItem("app_user_id", res.token )
+                    history.push("/")
+                }
+                else {
+                    invalidDialog.current.showModal()
+                }
+            })
+    }
+>>>>>>> main
 
   return (
     <main className="container--login">

@@ -6,14 +6,14 @@ export const TagProvider = props => {
     const [tags, setTags] = useState([])
 
     const getTags = () =>{
-        return fetch("http://localhost:8088/tags")
+        return fetch("http://localhost:8000/tags")
         .then(res => res.json())
         .then(setTags)
     }
 
 
     const addTag = tag => {
-        return fetch ("http://localhost:8088/tags", {
+        return fetch ("http://localhost:8000/tags", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
