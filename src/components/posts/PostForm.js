@@ -26,11 +26,11 @@ export const PostForm = (props) => {
     }
 
     useEffect(() => {
-        getPostById(props.match.params.postId)
-            .then(setPost)
-            .then(getCategories)
+        getCategories()
+        .then(getPostById(props.match.params.postId))
     }, [])
 
+    console.log(categories)
     const constructNewPost = () => {
 
         let currentDate = new Date()
@@ -38,22 +38,21 @@ export const PostForm = (props) => {
 
             const editedPost = {
                 id: parseInt(props.match.params.postId),
-                user_id: parseInt(localStorage.getItem("app_user_id")),
-                category_id: parseInt(post.category),
+                userId: parseInt(localStorage.getItem("app_user_id")),
+                categoryId: parseInt(post.category),
                 title: title.current.value,
-                publication_date: currentDate,
-                image_url: imageUrl.current.value,
-                content: content.current.value
+                profileImageUrl: imageUrl.current.value,
+                content: content.current.value,
+                approved: true
             }
             updatePost(editedPost).then(props.history.push("/posts"))
         } else {
             addPost({
 
-                user_id: parseInt(localStorage.getItem("app_user_id")),
-                category_id: parseInt(post.category),
+                userId: parseInt(localStorage.getItem("app_user_id")),
+                categoryId: parseInt(post.category),
                 title: title.current.value,
-                publication_date: currentDate,
-                image_url: imageUrl.current.value,
+                profileImageUrl: imageUrl.current.value,
                 content: content.current.value,
                 approved: true
             })

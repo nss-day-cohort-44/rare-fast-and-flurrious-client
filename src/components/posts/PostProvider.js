@@ -11,21 +11,34 @@ export const PostProvider = (props) => {
 
     //method to get posts from server
     const getPosts = () => {
-        return fetch("http://localhost:8000/posts")
+        return fetch("http://localhost:8000/posts",{
+            headers:{
+                "Authorization": `Token ${localStorage.getItem("app_user_id")}`
+            }
+        })
             .then(res => res.json())
             .then(setPosts)
+            .then(console.log(posts))
     }
 
     //method to get post by the id from server
     const getPostById = (id) => {
-        return fetch(`http://localhost:8000/posts/${id}`)
+        return fetch(`http://localhost:8000/posts/${id}`,{
+            headers:{
+                "Authorization": `Token ${localStorage.getItem("app_user_id")}`
+            }
+        })
             .then(res => res.json())
     }
 
     //method to get posts by the user id that created the post from server
     const getPostsByUserId = (userId) => {
         userId = localStorage.getItem("app_user_id")
-        return fetch(`http://localhost:8000/posts?user_id=${userId}`)
+        return fetch(`http://localhost:8000/posts?user_id=${localStorage.getItem("app_user_id")}`,{
+            headers:{
+                "Authorization": `Token ${localStorage.getItem("app_user_id")}`
+            }
+        })
             .then(res => res.json())
             .then(setPosts)
     }
@@ -33,7 +46,10 @@ export const PostProvider = (props) => {
     //method to delete posts from server
     const deletePost = (id) => {
         return fetch(`http://localhost:8000/posts/${id}`, {
-            method: "DELETE"
+            method: "DELETE",
+            headers:{
+                "Authorization": `Token ${localStorage.getItem("app_user_id")}`
+            }
         })
             .then(getPosts)
     }
@@ -44,7 +60,8 @@ export const PostProvider = (props) => {
         return fetch("http://localhost:8000/posts", {
             method: "POST",
             headers: {
-                "Content-Type": "application/json"
+                "Content-Type": "application/json",
+                "Authorization": `Token ${localStorage.getItem("app_user_id")}`
             },
             body: JSON.stringify(post)
         })
@@ -57,7 +74,8 @@ export const PostProvider = (props) => {
         return fetch(`http://localhost:8000/posts/${newPost.id}`, {
             method: "PUT",
             headers: {
-                "Content-Type": "application/json"
+                "Content-Type": "application/json",
+                "Authorization": `Token ${localStorage.getItem("app_user_id")}`
             },
             body: JSON.stringify(newPost)
         })
