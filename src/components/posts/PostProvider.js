@@ -10,15 +10,67 @@ export const PostProvider = (props) => {
 
   //method to get posts from server
   const getPosts = () => {
+    return fetch("http://localhost:8000/posts", {
+      headers: {
+        Authorization: `Token ${localStorage.getItem("app_user_id")}`,
+      },
+    })
+      .then((res) => res.json())
+      .then(setPosts)
+      .then(console.log(posts));
+  };
+
+  //method to get post by the id from server
+  const getPostById = (id) => {
+    return fetch(`http://localhost:8000/posts/${id}`, {
+      headers: {
+        Authorization: `Token ${localStorage.getItem("app_user_id")}`,
+      },
+    }).then((res) => res.json());
+  };
+
+  //method to get posts by the user id that created the post from server
+  const getPostsByUserId = (userId) => {
+    userId = localStorage.getItem("app_user_id");
+    return fetch(
+      `http://localhost:8000/posts?user_id=${localStorage.getItem(
+        "app_user_id"
+      )}`,
+      {
+        headers: {
+          Authorization: `Token ${localStorage.getItem("app_user_id")}`,
+        },
+      }
+    )
+      .then((res) => res.json())
+      .then(setPosts);
+  };
+
+  //method to delete posts from server
+  const deletePost = (id) => {
+    return fetch(`http://localhost:8000/posts/${id}`, {
+      method: "DELETE",
+      headers: {
+        Authorization: `Token ${localStorage.getItem("app_user_id")}`,
+      },
+    }).then(getPosts);
+  };
+
+  //method to get posts from server
+  const getPosts = () => {
     return fetch("http://localhost:8000/posts")
       .then((res) => res.json())
       .then(setPosts);
   };
 
-  //method to get post by the id from server
-  const getPostById = (id) => {
-    return fetch(`http://localhost:8000/posts/${id}`).then((res) => res.json());
-  };
+  return fetch("http://localhost:8000/posts", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Token ${localStorage.getItem("app_user_id")}`,
+    },
+    body: JSON.stringify(post),
+  }).then((res) => res.json());
 
   //method to get posts by the user id that created the post from server
   const getPostsByUserId = (userId) => {
@@ -28,10 +80,15 @@ export const PostProvider = (props) => {
       .then(setPosts);
   };
 
-  //method to delete posts from server
-  const deletePost = (id) => {
-    return fetch(`http://localhost:8000/posts/${id}`, {
-      method: "DELETE",
+  //method to edit posts on the server
+  const updatePost = (newPost) => {
+    return fetch(`http://localhost:8000/posts/${newPost.id}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Token ${localStorage.getItem("app_user_id")}`,
+      },
+      body: JSON.stringify(newPost),
     }).then(getPosts);
   };
 
