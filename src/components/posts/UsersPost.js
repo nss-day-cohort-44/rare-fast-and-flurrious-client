@@ -12,8 +12,8 @@ export const UsersPost = ({post, props}) => {
               Title: {post.title}
           </Link>
         </h3>
-        <p>Author: {post.user_id}</p>
-        <p>Category: {post.category_id}</p>
+        <p>Author: {post.user.username}</p>
+        <p>Category: {post.category.label}</p>
        
     </section>
     ) 
