@@ -10,11 +10,12 @@ import { CategoryList } from "./categories/categoryList";
 import { CategoryForm } from "./categories/categoryForm";
 import { PostForm } from "./posts/PostForm";
 import { CommentProvider } from "./comments/CommentProvider";
-import { CommentForm } from "./comments/CommentForm";
+// import { CommentForm } from "./comments/CommentForm";
 import { UserPosts } from "./posts/UsersPosts";
 import { TagList } from "./tags/TagList";
 import { TagForm } from "./tags/TagForm";
 import { TagProvider } from "./tags/TagProvider";
+import { CommentList } from "./comments/CommentList";
 
 export const ApplicationViews = (props) => {
   return (
@@ -50,11 +51,12 @@ export const ApplicationViews = (props) => {
 
       <CategoryProvider>
         <PostProvider>
-          <Route
-            exact
-            path="/posts"
-            render={
-              /*  props =
+          <CommentProvider>
+            <Route
+              exact
+              path="/posts"
+              render={
+                /*  props =
                     {
                         match: {},
                         location: {},
@@ -66,28 +68,35 @@ export const ApplicationViews = (props) => {
                     match: {}
                     location: {}
                     */
-              (props) => <PostList {...props} />
-            }
-          />
-          <Route
-            exact
-            path="/myposts"
-            render={(props) => <UserPosts {...props} />}
-          />
-          <Route
-            exact
-            path="/posts/:id(\d+)"
-            render={(props) => <PostDetails {...props} />}
-          />
-          <Route
-            exact
-            path="/PostForm"
-            render={(props) => <PostForm {...props} />}
-          />
-          <Route
-            path="/Posts/edit/:postId(\d+)"
-            render={(props) => <PostForm {...props} />}
-          />
+                (props) => <PostList {...props} />
+              }
+            />
+            <Route
+              exact
+              path="/myposts"
+              render={(props) => <UserPosts {...props} />}
+            />
+            <Route
+              exact
+              path="/posts/:id(\d+)"
+              render={(props) => <PostDetails {...props} />}
+            />
+            <Route
+              exact
+              path="/posts/:id(\d+)"
+              render={(props) => <CommentList {...props} />}
+            />
+
+            <Route
+              exact
+              path="/PostForm"
+              render={(props) => <PostForm {...props} />}
+            />
+            <Route
+              path="/Posts/edit/:postId(\d+)"
+              render={(props) => <PostForm {...props} />}
+            />
+          </CommentProvider>
         </PostProvider>
       </CategoryProvider>
 
@@ -103,13 +112,13 @@ export const ApplicationViews = (props) => {
           render={(props) => <TagForm {...props} />}
         />
       </TagProvider>
-
+      {/* 
       <CommentProvider>
         <Route
           path="/CommentForm"
           render={(props) => <CommentForm {...props} />}
         />
-      </CommentProvider>
+      </CommentProvider> */}
     </>
   );
 };

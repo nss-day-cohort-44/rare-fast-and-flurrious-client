@@ -1,14 +1,21 @@
-import React from "react";
+import React, { useContext } from "react";
 import "./Comment.css";
-import { Link } from "react-router-dom";
-
+import { CommentContext } from "./CommentProvider";
+const { deleteComment } = useContext(CommentContext);
 export const Comment = ({ comment }) => (
   <section className="comment">
     <div className="comment_name">
-      <Link to={`/posts/${comment.post_id}/comments`}>
-        Post Id {comment.post_id} Comment Below
-      </Link>
       <div className="commentContent">{comment.content}</div>
+      <button
+        className="btn--release"
+        onClick={() => {
+          deleteComment(post.id).then(() => {
+            props.history.push("/posts");
+          });
+        }}
+      >
+        Delete Comment
+      </button>
     </div>
   </section>
 );
