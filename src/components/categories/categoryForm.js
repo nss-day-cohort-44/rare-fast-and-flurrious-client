@@ -5,18 +5,11 @@ import { CategoryContext } from "./categoryProvider"
 export const CategoryForm = props => {
 
 
-    const { category, addCategory, updateCategory, getCategory } = useContext(CategoryContext)
+    const { category, addCategory, updateCategory } = useContext(CategoryContext)
 
     const [categoryObject, setCategoryObject] = useState({})
 
     const editMode = props.match.params.hasOwnProperty("categoryId")
-
-    
-    useEffect(() => {
-        if (editMode) {
-            getCategory(props.match.params.categoryId)
-        }
-    }, [])
 
 
     const handleControlledInputChange = (event) => {
