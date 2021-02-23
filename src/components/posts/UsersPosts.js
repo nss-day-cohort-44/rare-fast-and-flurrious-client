@@ -8,7 +8,7 @@ export const UserPosts = (props) => {
 
 
     useEffect(() => {
-        getPostsByUserId()
+        getPostsByUserId(localStorage.getItem("app_user_id"))
     }, [])
 
 

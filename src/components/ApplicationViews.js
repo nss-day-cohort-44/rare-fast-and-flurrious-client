@@ -12,9 +12,9 @@ import { PostForm } from "./posts/PostForm"
 import { CommentProvider } from "./comments/CommentProvider"
 import { CommentForm } from "./comments/CommentForm"
 import { UserPosts } from "./posts/UsersPosts"
-import { TagList } from "./tags/tagList"
-import { TagForm } from "./tags/tagForm"
-import { TagProvider } from "./tags/tagProvider"
+import { TagList } from "./tags/TagList"
+import { TagForm } from "./tags/TagForm"
+import { TagProvider } from "./tags/TagProvider"
 
 export const ApplicationViews = (props) => {
     return <>
@@ -25,10 +25,15 @@ export const ApplicationViews = (props) => {
         </main>
 
         <CategoryProvider>
-            <Route exact path="/categories">
-                <CategoryList {...props} />
-                <CategoryForm />
-            </Route>
+            <Route exact path="/categories"
+                render={props => <CategoryList {...props} />}
+            />
+            <Route exact path="/categories/create"
+                render={props => <CategoryForm {...props} />}
+            />
+            <Route exact path="/categories/edit/:categoryId(\d+)"
+                render={props => <CategoryForm {...props} />}
+            />
         </CategoryProvider>
 
         <ProfileProvider>
@@ -80,10 +85,14 @@ export const ApplicationViews = (props) => {
                 props => <TagList {...props} />
 
             } />
-            <Route exact path="/tags" render={
+            <Route exact path="/tags/create" render={
                 props => <TagForm {...props} />
 
             } />
+                 <Route path="/tags/edit/:tagId(\d+)" render={
+                    props => <TagForm {...props} />
+
+                } />
         </TagProvider>
 
         <CommentProvider>
