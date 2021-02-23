@@ -10,8 +10,7 @@
 ```git fetch --all```
 ```git checkout branch-name```
 ```code .```
-```pipenv shell```
-```python3 manage.py runserver```
+```npm start```
 
 ## Closes #
 
