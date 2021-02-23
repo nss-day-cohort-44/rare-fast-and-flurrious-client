@@ -25,10 +25,15 @@ export const ApplicationViews = (props) => {
         </main>
 
         <CategoryProvider>
-            <Route exact path="/categories">
-                <CategoryList {...props} />
-                <CategoryForm />
-            </Route>
+            <Route exact path="/categories"
+                render={props => <CategoryList {...props} />}
+            />
+            <Route exact path="/categories/create"
+                render={props => <CategoryForm {...props} />}
+            />
+            <Route exact path="/categories/edit/:categoryId(\d+)"
+                render={props => <CategoryForm {...props} />}
+            />
         </CategoryProvider>
 
         <ProfileProvider>
