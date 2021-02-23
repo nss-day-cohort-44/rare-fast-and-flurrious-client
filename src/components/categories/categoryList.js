@@ -1,24 +1,23 @@
 import React, { useContext, useEffect } from "react"
 import { CategoryContext } from "./categoryProvider"
-import { useHistory } from 'react-router-dom'
+
 
 export const CategoryList = props => {
 
-    const history = useHistory()
 
-    const { categories, getCategories } = useContext(CategoryContext)
+    const { categories, getCategories, getCategory, setCategory } = useContext(CategoryContext)
 
 
     useEffect(() => {
         getCategories()
-        console.log(props)
+        setCategory({})
     }, [])
 
     return (
         <>
             <button onClick={() => {
                 console.log(props)
-                history.push(`/categories/create`)
+                props.history.push(`/categories/create`)
             }}>Create New Category</button>
             <br />
             {
@@ -26,8 +25,8 @@ export const CategoryList = props => {
                     return <div>
                         <p>{cat.label}</p>
                         <button onClick={() => {
-                            console.log(props)
-                            history.push(`/categories/edit/${cat.id}`)
+                            getCategory(cat.id)
+                                .then(props.history.push(`/categories/edit/${cat.id}`))
                         }}>Edit</button>
                     </div>
                 })

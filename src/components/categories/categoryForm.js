@@ -1,64 +1,79 @@
-import React, { useRef, useContext, useEffect } from "react"
+import React, { useState, useContext, useEffect } from "react"
 import { CategoryContext } from "./categoryProvider"
-import { useHistory } from 'react-router-dom'
+
 
 export const CategoryForm = props => {
 
-    const history = useHistory()
 
-    const { categories, getCategories, addCategory } = useContext(CategoryContext)
+    const { category, addCategory, updateCategory, getCategory } = useContext(CategoryContext)
 
-    // const val = useRef()
-    const [category, setCategory] = useState({})
+    const [categoryObject, setCategoryObject] = useState({})
 
     const editMode = props.match.params.hasOwnProperty("categoryId")
 
+    
     useEffect(() => {
-        getCategories()
+        if (editMode) {
+            getCategory(props.match.params.categoryId)
+        }
     }, [])
 
+
     const handleControlledInputChange = (event) => {
-        const newCategory = Object.assign({}, category)          // Create copy
+        const newCategory = Object.assign({}, categoryObject)          // Create copy
         newCategory[event.target.name] = event.target.value    // Modify copy
-        setCategory(newCategory)
+        setCategoryObject(newCategory)
     }
+
 
     const constructNewCategory = () => {
         if (editMode) {
             // PUT
             updateCategory({
                 id: category.id,
-                label: category.label
+                label: categoryObject.label
             })
-                .then(() => history.push(`/categories`))
+                .then(() => props.history.push(`/categories`))
         } else {
             // POST
             addCategory({
-                label: category.label
+                label: categoryObject.label
             })
-                .then(() => history.push(`/categories`))
+                .then(() => props.history.push(`/categories`))
         }
     }
 
 
     return (
-        <>
+        <fieldset>
 
-            <input type="text" ref={val} placeholder="New Category" defaultValue={catagory.label}></input>
+            <button onClick={e => {
+                console.log(categoryObject)
+                e.preventDefault()
+                props.history.push(`/categories`)
+            }}>Back</button>
+
+            <br />
+
+            <input type="text"
+                name="label"
+                required autoFocus
+                placeholder="New Category"
+                defaultValue={category.label}
+                onChange={handleControlledInputChange}></input>
+
             {editMode ?
                 <button type="submit" onClick={e => {
-                    console.log(categories)
+                    console.log(categoryObject)
                     e.preventDefault()
-                    addNewCategory()
-                }}>Create Category</button>
+                    constructNewCategory()
+                }}>Update Category</button>
                 :
                 <button type="submit" onClick={e => {
-                    console.log(categories)
+                    console.log(categoryObject)
                     e.preventDefault()
-                    addNewCategory()
-                }}>Update Category</button>}
-
-
-        </>
+                    constructNewCategory()
+                }}>Create Category</button>}
+        </fieldset>
     )
 }

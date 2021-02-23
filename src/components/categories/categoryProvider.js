@@ -1,11 +1,14 @@
 import React, { useState } from "react"
 
+
 export const CategoryContext = React.createContext()
+
 
 export const CategoryProvider = props => {
     const [categories, setCategories] = useState([])
 
     const [category, setCategory] = useState([])
+
 
     const getCategories = () => {
         return fetch("http://localhost:8000/categories", {
@@ -53,9 +56,16 @@ export const CategoryProvider = props => {
 
 
 
-    return <CategoryContext.Provider value={{
-        categories, getCategories, category, setCategory, getCategory, addCategory,updateCategory
-    }}>
+    return <CategoryContext.Provider
+        value={{
+            categories,
+            getCategories,
+            category,
+            setCategory,
+            getCategory,
+            addCategory,
+            updateCategory
+        }}>
         {props.children}
     </CategoryContext.Provider>
 
