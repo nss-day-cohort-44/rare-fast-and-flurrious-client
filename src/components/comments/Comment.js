@@ -5,7 +5,7 @@ import { CommentContext } from "./CommentProvider";
 
 export const Comment = ({ comment }) => {
   const { deleteComment } = useContext(CommentContext);
-  const history = useHistory();
+  //   const history = useHistory();
 
   return (
     <section className="comment">
