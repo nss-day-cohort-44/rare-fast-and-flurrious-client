@@ -3,7 +3,6 @@ import {Link} from "react-router-dom"
 
 export const UsersPost = ({post, props}) => {
     if (localStorage.getItem("app_user_id")) {
-        console.log(post)
     return (
     
     <section className="userPostCard">

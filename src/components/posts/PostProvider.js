@@ -26,7 +26,8 @@ export const PostProvider = (props) => {
       headers: {
         Authorization: `Token ${localStorage.getItem("app_user_id")}`,
       },
-    }).then((res) => res.json());
+    }).then((res) => res.json())
+    .then(setPost)
   };
 
   //method to get posts by the user id that created the post from server
@@ -80,6 +81,31 @@ export const PostProvider = (props) => {
     }).then(getPosts);
   };
 
+  const deletePostTag = (postId, tagId) =>{
+    return fetch (`http://localhost:8000/posts/${postId}/tag`,{
+      method: 'DELETE',
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Token ${localStorage.getItem("app_user_id")}`,
+      },
+      body: JSON.stringify(tagId)
+    })
+    .then(getPostById(postId))
+  }
+
+  const addPostTag = (postId, tagId) =>{
+    return fetch (`http://localhost:8000/posts/${postId}/tag`, {
+      method: 'POST',
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Token ${localStorage.getItem("app_user_id")}`,
+      },
+      body: JSON.stringify(tagId)
+    }
+    )
+    .then(getPostById(postId))
+  }
+
   return (
     <PostContext.Provider
       value={{
@@ -93,6 +119,8 @@ export const PostProvider = (props) => {
         addPost,
         getPostsByUserId,
         updatePost,
+        deletePostTag,
+        addPostTag
       }}
     >
       {props.children}
