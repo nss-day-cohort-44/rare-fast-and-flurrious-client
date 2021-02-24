@@ -7,7 +7,7 @@ import { Link } from "react-router-dom"
 //This module renders the detail page for each post
 
 export const PostDetails = (props) => {
-  const { getPostById, deletePost, post, setPost, deletePostTag } = useContext(PostContext);
+  const { getPostById, deletePost, post, setPost, deletePostTag, posts } = useContext(PostContext);
   const { addComment } = useContext(CommentContext);
   const [postTags, setPostTags] = useState([])
 
@@ -29,7 +29,7 @@ export const PostDetails = (props) => {
     getPostById(postId)
       // Need below .then if you do not setPost in the postProvider
       .then(console.log(post))
-  }, []);
+  }, [posts]);
 
 
 
