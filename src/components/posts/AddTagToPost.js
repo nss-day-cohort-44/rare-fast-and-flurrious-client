@@ -1,6 +1,7 @@
 import React, {useContext, useRef, useEffect, useState} from "react"
 import {TagContext} from "../tags/TagProvider"
 import {PostContext} from "./PostProvider"
+import { Link } from "react-router-dom"
 
 export const AddTagToPost = (props) =>{
 const {getPostById, post, addPostTag} = useContext(PostContext)
@@ -19,6 +20,8 @@ console.log(props)
 
 return(
     <form>
+        <Link  to={{
+                pathname: `/posts/${post.id}`}}>Back To Post</Link>
         <fieldset>
             <div>
                 {
