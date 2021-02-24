@@ -1,13 +1,15 @@
 import React, { useContext, useEffect, useState, useRef } from "react";
 import { PostContext } from "./PostProvider";
 import { CommentContext } from "../comments/CommentProvider";
+import { TagContext } from "../tags/TagProvider";
+import { Link } from "react-router-dom"
 
 //This module renders the detail page for each post
 
 export const PostDetails = (props) => {
-  const { getPostById, deletePost } = useContext(PostContext);
-  const [post, setPost] = useState({});
+  const { getPostById, deletePost, post, setPost, deletePostTag, posts } = useContext(PostContext);
   const { addComment } = useContext(CommentContext);
+  const [postTags, setPostTags] = useState([])
 
   const content = useRef(null);
 
@@ -26,9 +28,19 @@ export const PostDetails = (props) => {
     // console.log("props", props)
     getPostById(postId)
       // Need below .then if you do not setPost in the postProvider
-      .then(setPost);
-  }, []);
+      .then(console.log(post))
+  }, [posts]);
 
+
+
+
+const removeTag=(postId, pt) =>{
+  const tagId = {tagId : pt}
+  deletePostTag(postId, tagId)
+
+}
+// console.log(post.tags)
+console.log(post)
   const commentForm = useRef(null);
   return (
     <>
@@ -71,10 +83,20 @@ export const PostDetails = (props) => {
       <section className="post">
         <h3>Post Detail</h3>
         <h3 className="post__title">{post.title}</h3>
-        <h3 className="post__title">{post.content}</h3>
+        <div className="post__title">{post.content}</div>
         <h3 className="post__title">{post.publication_date}</h3>
-        <h3 className="post__title">{post.user_id}</h3>
-
+        <h3>Tags</h3>
+        <Link to={{
+                pathname: `/posts/${post.id}/addtag`,
+                state: { chosenPost: post }}}>Add a Tag</Link>
+        {
+          post.tags ? post.tags.map((pt)=>{
+            return(
+              <div>{pt.label}<button onClick={()=>{removeTag(post.id, pt.id)}}>Delete Tag From Post</button></div>
+            )
+          }) : <></>
+        }
+        <h3>Comments</h3>
         <button
           onClick={() => {
             props.history.push(`/posts/edit/${post.id}`);
@@ -100,6 +122,7 @@ export const PostDetails = (props) => {
         >
           Add Comment
         </button>
+        
       </section>
     </>
   );
