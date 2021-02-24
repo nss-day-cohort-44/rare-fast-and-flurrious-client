@@ -3,7 +3,7 @@ import { CategoryContext } from "./categoryProvider";
 
 export const CategoryList = (props) => {
   // Delete As a Dialog
-  const dialog = useRef()
+  const dialog = useRef();
 
   const {
     categories,
@@ -33,29 +33,29 @@ export const CategoryList = (props) => {
         return (
           <>
             {/* <div style={({ height: "200px" }, { fontSize: "14px" })}> */}
-              <dialog ref={dialog}>
-                <div>
-                  Are you sure, you want to delete this Tag?
-                  <button
-                    className="btn--release"
-                    onClick={() => {
-                      deleteCategory(cat.id);
-                    }}
-                  >
-                    Delete Tag
-                  </button>
-                  <br></br>
-                  <button
-                    className="btn--release"
-                    onClick={() => {
-                      props.history.push(`/categories`);
-                      dialog.current.close();
-                    }}
-                  >
-                    Cancel Delete
-                  </button>
-                </div>
-              </dialog>
+            <dialog ref={dialog}>
+              <div>
+                Are you sure, you want to delete this Tag?
+                <button
+                  className="btn--release"
+                  onClick={() => {
+                    deleteCategory(cat.id);
+                  }}
+                >
+                  Delete Tag
+                </button>
+                <br></br>
+                <button
+                  className="btn--release"
+                  onClick={() => {
+                    props.history.push(`/categories`);
+                    dialog.current.close();
+                  }}
+                >
+                  Cancel Delete
+                </button>
+              </div>
+            </dialog>
             {/* </div> */}
             <div>
               <p>{cat.label}</p>
@@ -81,7 +81,7 @@ export const CategoryList = (props) => {
             </div>
           </>
         );
-      })}
+      
     </>
   );
 };
