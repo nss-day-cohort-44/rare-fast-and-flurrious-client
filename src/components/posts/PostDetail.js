@@ -14,7 +14,7 @@ export const PostDetails = (props) => {
   const constructNewComment = () => {
     {
       addComment({
-        post_id: parseInt(props.match.params.id),
+        post: parseInt(props.match.params.id),
         content: content.current.value,
         author_id: parseInt(localStorage.getItem("app_user_id")),
       });
