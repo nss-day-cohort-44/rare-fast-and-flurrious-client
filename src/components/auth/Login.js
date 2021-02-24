@@ -16,7 +16,7 @@ export const Login = () => {
       headers: {
         "Content-Type": "application/json",
         Accept: "application/json",
-        Authorization: `Token ${localStorage.getItem("app_userId")}`,
+        Authorization: `Token ${localStorage.getItem("app_user_id")}`,
       },
       body: JSON.stringify({
         username: email.current.value,
@@ -27,7 +27,8 @@ export const Login = () => {
       .then((res) => {
         console.log(res);
         if ("valid" in res && res.valid) {
-          localStorage.setItem("app_user_id", res.id);
+          localStorage.setItem("app_user_id", res.token);
+          console.log(res)
           history.push("/");
         } else {
           invalidDialog.current.showModal();
