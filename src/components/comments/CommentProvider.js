@@ -38,7 +38,7 @@ export const CommentProvider = (props) => {
       .then(setPostComments);
   };
   const deleteComment = (id) => {
-    return fetch(`http://localhost:8000/posts/${id}`, {
+    return fetch(`http://localhost:8000/comments/${id}`, {
       method: "DELETE",
       headers: {
         Authorization: `Token ${localStorage.getItem("app_user_id")}`,

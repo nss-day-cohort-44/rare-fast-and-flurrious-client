@@ -1,21 +1,25 @@
 import React, { useContext } from "react";
+import { useHistory } from "react-router-dom";
 import "./Comment.css";
 import { CommentContext } from "./CommentProvider";
-const { deleteComment } = useContext(CommentContext);
-export const Comment = ({ comment }) => (
-  <section className="comment">
-    <div className="comment_name">
-      <div className="commentContent">{comment.content}</div>
-      <button
-        className="btn--release"
-        onClick={() => {
-          deleteComment(post.id).then(() => {
-            props.history.push("/posts");
-          });
-        }}
-      >
-        Delete Comment
-      </button>
-    </div>
-  </section>
-);
+
+export const Comment = ({ comment }) => {
+  const { deleteComment } = useContext(CommentContext);
+  const history = useHistory();
+
+  return (
+    <section className="comment">
+      <div className="comment_name">
+        <div className="commentContent">{comment.content}</div>
+        <button
+          className="btn--release"
+          onClick={() => {
+            deleteComment(comment.id);
+          }}
+        >
+          Delete Comment
+        </button>
+      </div>
+    </section>
+  );
+};
